@@ -6,7 +6,7 @@ import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Calendar, Clock } from 'lucide-react';
-import { bookAppointment, services } from '../mock';
+import { bookAppointment, services, staff } from '../mock';
 import { toast } from 'sonner';
 
 const AppointmentModal = ({ open, onOpenChange }) => {
@@ -15,6 +15,7 @@ const AppointmentModal = ({ open, onOpenChange }) => {
     phone: '',
     email: '',
     service: '',
+    staffMember: '',
     date: '',
     time: '',
     notes: ''
@@ -67,10 +68,29 @@ const AppointmentModal = ({ open, onOpenChange }) => {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6 mt-4">
+         <div>
+            <Label htmlFor="staffMember" className="text-sm font-medium mb-2 block">
+              Usta Seçin *
+            </Label>
+            <Select value={formData.staffMember} onValueChange={(value) => handleChange('staffMember', value)} required>
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Usta seçin" />
+              </SelectTrigger>
+              <SelectContent>
+                {staff.map((member) => (
+                  <SelectItem key={member.id} value={member.name}>
+                    {member.name} — {member.position}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <Label htmlFor="name" className="text-sm font-medium mb-2 block">
-                Adınız Soyadınız *
+              <Label htmlFor="date" className="text-sm font-medium mb-2 block">
+                <Calendar size={16} className="inline mr-2" />
+                Tarix *
               </Label>
               <Input
                 id="name"
