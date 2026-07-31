@@ -151,6 +151,15 @@ export const staff = [
     specialization: "Terapevtik və rahatlaşdırıcı masaj",
     image: "https://images.pexels.com/photos/15949782/pexels-photo-15949782.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     bio: "Müxtəlif masaj texnikalarında ixtisaslaşmış, lisenziyalı masaj mütəxəssisi."
+  },
+  {
+    id: 6,
+    name: "Miran",
+    position: "Baş Stilist",
+    experience: "3 il təcrübə",
+    specialization: "Ümumi gözəllik xidmətləri",
+    image: "https://images.unsplash.com/photo-1580618672591-eb180b1a973f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwyfHxoYWlyJTIwc3R5bGluZ3xlbnwwfHx8fDE3ODM4NzM5MjJ8MA&ixlib=rb-4.1.0&q=85",
+    bio: "Peşəkar və mehriban yanaşması ilə tanınan usta."
   }
 ];
 
