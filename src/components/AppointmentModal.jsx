@@ -45,12 +45,29 @@ const AppointmentModal = ({ open, onOpenChange }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const result = await bookAppointment(formData);
+      const response = await fetch('https://lura-platform-main.vercel.app/api/v1/create-appointment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subdomain: 'test',
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          serviceName: formData.service,
+          staffName: formData.staffMember,
+          date: formData.date,
+          time: formData.time,
+          notes: formData.notes,
+        }),
+      });
+
+      const result = await response.json();
+
       if (result.success) {
         toast.success(result.message);
         setFormData({
@@ -58,11 +75,14 @@ const AppointmentModal = ({ open, onOpenChange }) => {
           phone: '',
           email: '',
           service: '',
+          staffMember: '',
           date: '',
           time: '',
           notes: ''
         });
         onOpenChange(false);
+      } else {
+        toast.error(result.error || 'Xəta baş verdi.');
       }
     } catch (error) {
       toast.error('Xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.');
