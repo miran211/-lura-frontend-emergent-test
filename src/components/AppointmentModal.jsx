@@ -6,10 +6,26 @@ import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Calendar, Clock } from 'lucide-react';
-import { bookAppointment, services, staff } from '../mock';
+import { bookAppointment } from '../mock';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 
 const AppointmentModal = ({ open, onOpenChange }) => {
+  const [services, setServices] = useState([]);
+  const [staff, setStaff] = useState([]);
+
+  useEffect(() => {
+    fetch('https://lura-platform-main.vercel.app/api/v1/tenant-data?subdomain=test')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setServices(data.services);
+          setStaff(data.staff);
+        }
+      })
+      .catch((err) => console.error('Melumat cekilmedi:', err));
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -77,9 +93,9 @@ const AppointmentModal = ({ open, onOpenChange }) => {
                 <SelectValue placeholder="Usta seçin" />
               </SelectTrigger>
               <SelectContent>
-                {staff.map((member) => (
+               {staff.map((member) => (
                   <SelectItem key={member.id} value={member.name}>
-                    {member.name} — {member.position}
+                    {member.name} — {member.specialty}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -142,9 +158,9 @@ const AppointmentModal = ({ open, onOpenChange }) => {
                 <SelectValue placeholder="Xidmət seçin" />
               </SelectTrigger>
               <SelectContent>
-                {services.map((service) => (
-                  <SelectItem key={service.id} value={service.title}>
-                    {service.title}
+               {services.map((service) => (
+                  <SelectItem key={service.id} value={service.name}>
+                    {service.name}
                   </SelectItem>
                 ))}
               </SelectContent>
