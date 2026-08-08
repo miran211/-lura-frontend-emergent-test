@@ -10,12 +10,16 @@ import { bookAppointment } from '../mock';
 import { useEffect } from 'react';
 import { toast } from 'sonner';
 
+function getSubdomain() {
+  const host = window.location.hostname;
+  return host.split('.')[0];
+}
 const AppointmentModal = ({ open, onOpenChange }) => {
   const [services, setServices] = useState([]);
   const [staff, setStaff] = useState([]);
 
   useEffect(() => {
-    fetch('https://lura-platform-main.vercel.app/api/v1/tenant-data?subdomain=test')
+    fetch(`https://lura-platform-main.vercel.app/api/v1/tenant-data?subdomain=${getSubdomain()}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
@@ -54,7 +58,7 @@ const handleSubmit = async (e) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          subdomain: 'test',
+          subdomain: getSubdomain(),
           name: formData.name,
           phone: formData.phone,
           email: formData.email,
