@@ -127,10 +127,9 @@ const handleSubmit = async (e) => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <div>
-              <Label htmlFor="date" className="text-sm font-medium mb-2 block">
-                <Calendar size={16} className="inline mr-2" />
-                Tarix *
+             <div>
+              <Label htmlFor="name" className="text-sm font-medium mb-2 block">
+                Adınız *
               </Label>
               <Input
                 id="name"
