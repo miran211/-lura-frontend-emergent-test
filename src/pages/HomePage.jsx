@@ -7,10 +7,8 @@ import Gallery from '../components/Gallery';
 import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import AppointmentModal from '../components/AppointmentModal';
 
 const HomePage = () => {
-  const [showAppointmentModal, setShowAppointmentModal] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -24,18 +22,14 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header scrolled={scrolled} onBookAppointment={() => setShowAppointmentModal(true)} />
-      <Hero onBookAppointment={() => setShowAppointmentModal(true)} />
+      <Header scrolled={scrolled} onBookAppointment={() => window.LuraWidget.open()} />
+      <Hero onBookAppointment={() => window.LuraWidget.open()} />
       <Services />
       <Staff />
       <Gallery />
       <Testimonials />
       <Contact />
-      <Footer onBookAppointment={() => setShowAppointmentModal(true)} />
-      <AppointmentModal 
-        open={showAppointmentModal} 
-        onOpenChange={setShowAppointmentModal} 
-      />
+      <Footer onBookAppointment={() => window.LuraWidget.open()} />
     </div>
   );
 };
