@@ -78,13 +78,16 @@ const Header = ({ scrolled, onBookAppointment }) => {
               </Button>
             </nav>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden text-gray-700 hover:text-amber-700 transition-colors"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+            {/* Right side: Lura account slot + mobile menu button */}
+            <div className="flex items-center gap-3 ml-4">
+              <div id="lura-account" className="flex items-center"></div>
+              <button
+                className="md:hidden text-gray-700 hover:text-amber-700 transition-colors"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
           </div>
         </div>
 
